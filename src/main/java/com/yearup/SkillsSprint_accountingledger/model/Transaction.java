@@ -21,9 +21,15 @@ public class Transaction {
 
     private LocalDateTime date;
 
+    public Transaction(){
 
-    public Transaction(int transactionId) {
+    }
+    public Transaction(int transactionId, String description, String vendor, int amount, LocalDateTime date) {
         this.transactionId = transactionId;
+        this.description = description;
+        this.vendor = vendor;
+        this.amount = amount;
+        this.date = date;
     }
 
     public int getTransactionId() {

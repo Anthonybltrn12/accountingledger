@@ -19,16 +19,16 @@ public class ProfileService
     public Optional<Profile> getByUserId(int userId) { return profileRepository.findById(userId);
     }
 
-    public Profile getProfileById(Long id) {
-        return profileRepository.findById(Math.toIntExact(id))
-                .orElseThrow(() -> new RuntimeException("Profile not found with id: " + id));
+    public Profile getProfileById(int userId) {
+        return profileRepository.findById(Math.toIntExact(userId))
+                .orElseThrow(() -> new RuntimeException("Profile not found with id: " + userId));
     }
 
     public Profile createProfile(Profile profile) {
         return profileRepository.save(profile);
     }
 
-    public Profile updateProfile(int userId, Profile profile) {
+    public Profile updateProfile(Integer userId, Profile profile) {
         Profile existing = profileRepository.findById(userId).orElseThrow();
         existing.setFirstName(profile.getFirstName());
         existing.setLastName(profile.getLastName());
