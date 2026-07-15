@@ -19,9 +19,10 @@ public class ProfileService
     public Optional<Profile> getByUserId(int userId) { return profileRepository.findById(userId);
     }
 
-    public Profile getProfileById(int userId) {
+    public Profile getProfileById(Integer userId) {
         return profileRepository.findById(Math.toIntExact(userId))
                 .orElseThrow(() -> new RuntimeException("Profile not found with id: " + userId));
+
     }
 
     public Profile createProfile(Profile profile) {
@@ -41,7 +42,7 @@ public class ProfileService
         return profileRepository.save(existing);
     }
 
-    public void deleteProfile(int userId) {
+    public void deleteProfile(Integer userId) {
         if (profileRepository.existsById(userId)) {
             profileRepository.deleteById(userId);
         } else {

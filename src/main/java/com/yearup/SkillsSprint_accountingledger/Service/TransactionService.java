@@ -5,6 +5,7 @@ import com.yearup.SkillsSprint_accountingledger.model.Transaction;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +21,31 @@ public class TransactionService {
         return transactionRepository.findAll();
     }
 
-    public Transaction getTransactionById(int id){
+    public Transaction getTransactionById(Integer id){
         return transactionRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Transaction not found with id: " + id));
+    }
+
+    public List<Transaction> getDeposits(){
+        List<Transaction> transactions = transactionRepository.findAll();
+        List<Transaction> deposits = new ArrayList<>();
+        for(Transaction transaction : transactions){
+            if(transaction.getAmount() > 0){
+                deposits.add(transaction);
+            }
+        }
+        return deposits;
+    }
+
+    public List<Transaction> getPayments(){
+        List<Transaction> transactions = transactionRepository.findAll();
+        List<Transaction> payments = new ArrayList<>();
+        for(Transaction transaction : transactions){
+            if(transaction.getAmount() % 2 < 0){
+                payments.add(transaction);
+            }
+        }
+        return payments;
     }
 
     public List<Transaction> searchByVendor(String vendor){
@@ -37,15 +60,21 @@ public class TransactionService {
                 .collect(Collectors.toList());
     }
 
-    public Transaction updateTransaction(int id, Transaction updatedTransaction){
+    public Transaction updateTransaction(Integer id, Transaction updatedTransaction){
         Transaction existing = getTransactionById(id);
         existing.setDescription(updatedTransaction.getDescription());
         existing.setVendor(updatedTransaction.getVendor());
         existing.setAmount(updatedTransaction.getAmount());
+        existing.setDate(updatedTransaction.getDate());
         return transactionRepository.save(existing);
     }
 
-    public void deleteTransaction(int id){
+    public Transaction addTransaction(Transaction transaction){
+        return transactionRepository.save(transaction);
+
+    }
+
+    public void deleteTransaction(Integer id){
         transactionRepository.deleteById(id);
     }
 

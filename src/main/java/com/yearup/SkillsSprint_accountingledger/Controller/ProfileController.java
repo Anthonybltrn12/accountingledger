@@ -21,8 +21,8 @@ public class ProfileController {
     }
 
     // GET http://localhost:8080/profile/{id}
-    @GetMapping("/{id}")
-    public ResponseEntity<Profile> getProfile(@PathVariable int userId) {
+    @GetMapping("/{userId}")
+    public ResponseEntity<Profile> getProfile(@PathVariable Integer userId) {
         Profile profile = profileService.getProfileById(userId);
         return ResponseEntity.ok(profile);
     }
@@ -36,16 +36,16 @@ public class ProfileController {
     }
 
     // PUT http://localhost:8080/profile/{id}
-    @PutMapping("/{id}")
-    public ResponseEntity<Profile> updateProfile(@PathVariable int userId,
+    @PutMapping("/{userId}")
+    public ResponseEntity<Profile> updateProfile(@PathVariable Integer userId,
                                                  @RequestBody Profile profile) {
         Profile updated = profileService.updateProfile(userId, profile);
         return ResponseEntity.ok(updated);
     }
 
     // DELETE http://localhost:8080/profile/{id}
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProfile(@PathVariable int userId) {
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> deleteProfile(@PathVariable Integer userId) {
         profileService.deleteProfile(userId);
         return ResponseEntity.noContent().build();
     }

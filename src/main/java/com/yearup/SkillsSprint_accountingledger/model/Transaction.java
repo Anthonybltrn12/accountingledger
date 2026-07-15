@@ -2,6 +2,7 @@ package com.yearup.SkillsSprint_accountingledger.model;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -11,20 +12,21 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="transactionId")
-    private int transactionId;
+    private Integer transactionId;
 
     private String description;
 
     private String vendor;
 
-    private int amount;
+    private Integer amount;
 
+    @CreationTimestamp
     private LocalDateTime date;
 
     public Transaction(){
 
     }
-    public Transaction(int transactionId, String description, String vendor, int amount, LocalDateTime date) {
+    public Transaction(Integer transactionId, String description, String vendor, Integer amount, LocalDateTime date) {
         this.transactionId = transactionId;
         this.description = description;
         this.vendor = vendor;
@@ -32,11 +34,11 @@ public class Transaction {
         this.date = date;
     }
 
-    public int getTransactionId() {
+    public Integer getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(int transactionId) {
+    public void setTransactionId(Integer transactionId) {
         this.transactionId = transactionId;
     }
 
@@ -56,7 +58,7 @@ public class Transaction {
         this.vendor = vendor;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
@@ -69,6 +71,6 @@ public class Transaction {
     }
 
     public void setDate(LocalDateTime date) {
-        this.date = date;
+        this.date = LocalDateTime.now();
     }
 }
