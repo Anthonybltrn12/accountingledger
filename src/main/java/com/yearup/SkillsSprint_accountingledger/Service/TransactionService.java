@@ -35,6 +35,7 @@ public class TransactionService {
         List<Transaction> deposits = new ArrayList<>();
         for(Transaction transaction : transactions){
             if(transaction.getCategoryId() == 1){
+                transaction.setAmount(Math.abs(transaction.getAmount()));
                 deposits.add(transaction);
             }
         }
@@ -46,6 +47,7 @@ public class TransactionService {
         List<Transaction> payments = new ArrayList<>();
         for(Transaction transaction : transactions){
             if(transaction.getCategoryId() == 2){
+                transaction.setAmount(-Math.abs(transaction.getAmount()));
                 payments.add(transaction);
             }
         }
