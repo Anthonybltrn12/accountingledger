@@ -26,6 +26,10 @@ public class TransactionService {
         .orElseThrow(() -> new RuntimeException("Transaction not found with id: " + id));
     }
 
+    public List<Transaction> listByCategoryId(int categoryId) {
+        return transactionRepository.findByCategoryId(categoryId);
+    }
+
     public List<Transaction> getDeposits(){
         List<Transaction> transactions = transactionRepository.findAll();
         List<Transaction> deposits = new ArrayList<>();

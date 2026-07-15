@@ -20,17 +20,21 @@ public class Transaction {
 
     private Integer amount;
 
+    @Column(name = "category_id")
+    private Integer categoryId;
+
     @CreationTimestamp
     private LocalDateTime date;
 
     public Transaction(){
 
     }
-    public Transaction(Integer transactionId, String description, String vendor, Integer amount, LocalDateTime date) {
+    public Transaction(Integer transactionId, String description, String vendor, Integer amount,Integer categoryId, LocalDateTime date) {
         this.transactionId = transactionId;
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
+        this.categoryId = categoryId;
         this.date = date;
     }
 
@@ -64,6 +68,14 @@ public class Transaction {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public LocalDateTime getDate() {
