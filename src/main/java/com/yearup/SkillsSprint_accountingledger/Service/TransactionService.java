@@ -34,7 +34,7 @@ public class TransactionService {
         List<Transaction> transactions = transactionRepository.findAll();
         List<Transaction> deposits = new ArrayList<>();
         for(Transaction transaction : transactions){
-            if(transaction.getAmount() > 0){
+            if(transaction.getCategoryId() == 1){
                 deposits.add(transaction);
             }
         }
@@ -45,7 +45,7 @@ public class TransactionService {
         List<Transaction> transactions = transactionRepository.findAll();
         List<Transaction> payments = new ArrayList<>();
         for(Transaction transaction : transactions){
-            if(transaction.getAmount() % 2 < 0){
+            if(transaction.getCategoryId() == 2){
                 payments.add(transaction);
             }
         }
