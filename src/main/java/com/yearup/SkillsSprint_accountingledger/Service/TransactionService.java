@@ -75,8 +75,8 @@ public class TransactionService {
         return transactionRepository.save(existing);
     }
 
-    public Transaction addTransaction(Transaction transaction){
-        return transactionRepository.save(transaction);
+    public List<Transaction> addTransaction(List<Transaction> transaction){
+        return transactionRepository.saveAll(transaction);
 
     }
 
