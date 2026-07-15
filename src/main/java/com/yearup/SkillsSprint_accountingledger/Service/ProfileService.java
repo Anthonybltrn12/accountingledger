@@ -1,8 +1,10 @@
 package com.yearup.SkillsSprint_accountingledger.Service;
 
 import com.yearup.SkillsSprint_accountingledger.Repository.ProfileRepository;
-import org.springframework.context.annotation.Profile;
+import com.yearup.SkillsSprint_accountingledger.model.Profile;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ProfileService
@@ -14,7 +16,7 @@ public class ProfileService
         this.profileRepository = profileRepository;
     }
 
-    public Profile getByUserId(int id) { return profileRepository.findById(id).orElseThrow();
+    public Optional<Profile> getByUserId(int userId) { return profileRepository.findById(userId);
     }
 
     public Profile getProfileById(Long id) {
@@ -26,8 +28,13 @@ public class ProfileService
         return profileRepository.save(profile);
     }
 
-    public Profile updateProfile(Long id, Profile profile) {
-
+    public Profile updateProfile(int userId, Profile profile) {
+        Profile existing = profileRepository.findById(userId).orElseThrow();
+        existing.setFirstName(profile.getFirstName());
+        existing.setLastName(profile.getLastName());
+        existing.setPhone(profile.getPhone());
+        existing.setEmail(profile.getEmail());
+        existing.setAddress(profile.getAddress());
         return profile;
     }
 

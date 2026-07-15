@@ -3,6 +3,8 @@ package com.yearup.SkillsSprint_accountingledger.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name="transactions")
 public class Transaction {
@@ -16,6 +18,9 @@ public class Transaction {
     private String vendor;
 
     private int amount;
+
+    private LocalDateTime date;
+
 
     public Transaction(int transactionId) {
         this.transactionId = transactionId;
@@ -51,5 +56,13 @@ public class Transaction {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 }

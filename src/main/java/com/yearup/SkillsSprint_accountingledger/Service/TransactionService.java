@@ -33,7 +33,7 @@ public class TransactionService {
 
     public List<Transaction> searchByDateRange(LocalDateTime start, LocalDateTime end){
         return transactionRepository.findAll().stream()
-                .filter(t -> t.getTransactionDate().isAfter(start) && t.getTransactionDate().isBefore(end))
+                .filter(t -> t.getDate().isAfter(start) && t.getDate().isBefore(end))
                 .collect(Collectors.toList());
     }
 
