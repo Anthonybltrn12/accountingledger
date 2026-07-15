@@ -35,10 +35,18 @@ public class ProfileService
         existing.setPhone(profile.getPhone());
         existing.setEmail(profile.getEmail());
         existing.setAddress(profile.getAddress());
-        return profile;
+        existing.setCity(profile.getCity());
+        existing.setState(profile.getState());
+        existing.setZip(profile.getZip());
+        return profileRepository.save(existing);
     }
 
-    public void deleteProfile(Long id) {
+    public void deleteProfile(int userId) {
+        if (profileRepository.existsById(userId)) {
+            profileRepository.deleteById(userId);
+        } else {
+            System.out.println("Profile not deleted.");
+        }
     }
 }
 
