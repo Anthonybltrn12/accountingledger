@@ -23,7 +23,7 @@ import java.util.List;
 
 // Sets "/transactions" as the starting URL for every endpoint in this controller.
 @RequestMapping("/transactions")
-@CrossOrigin(origins = "http://localhost:5184")
+@CrossOrigin(origins = "http://localhost:5191")
 public class TransactionController {
 
     // Stores the TransactionService used by this controller.
@@ -91,6 +91,11 @@ public class TransactionController {
 
         // Returns the matching transaction with HTTP status 200 OK.
         return ResponseEntity.ok(transaction);
+    }
+
+    @GetMapping("/balance")
+    public ResponseEntity<Integer> getBalance() {
+        return ResponseEntity.ok(transactionService.liveBalance());
     }
 
     @PostMapping("")

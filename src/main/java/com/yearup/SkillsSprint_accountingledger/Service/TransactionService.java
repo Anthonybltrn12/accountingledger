@@ -80,6 +80,20 @@ public class TransactionService {
 
     }
 
+    public Integer liveBalance(){
+        List<Transaction> transactions = transactionRepository.findAll();
+
+        int balance = 0;
+        for(Transaction transaction : transactions){
+            if(transaction.getCategoryId() == 1){
+                balance += transaction.getAmount();
+            }else{
+                balance -= transaction.getAmount();
+            }
+        }
+        return balance;
+    }
+
     public void deleteTransaction(Integer id){
         transactionRepository.deleteById(id);
     }
